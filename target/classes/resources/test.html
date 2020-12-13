@@ -1,0 +1,20 @@
+<html>
+<head>
+    <script type="text/javascript">
+        function getElements()
+        {
+            document.getElementsByName("myInput")[0].value='0';
+            document.getElementsByName("myInput")[1].value='1';
+            document.getElementsByName("myInput")[2].value='2';
+        }
+    </script>
+</head>
+
+<body>
+<input name="myInput" type="text" size="20" /><br />
+<input name="myInput" type="text" size="20" /><br />
+<input name="myInput" type="text" size="20" /><br />
+<br />
+<input type="button" onclick="getElements()" value="exec" />
+</body>
+</html>

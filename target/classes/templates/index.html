@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>设置棋盘大小</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+</head>
+
+<body class="lyear-layout-sidebar-close">
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+
+        <header class="lyear-layout-header" >
+
+            <nav class="navbar navbar-default">
+                <div class="topbar">
+
+                    <div class="topbar-left">
+                        <span class="navbar-page-title"> <h4>棋盘覆盖演示</h4> </span>
+                    </div>
+
+                    <div >
+
+                        <div class="example-box ">
+                            <button class="btn btn-w-lg btn-info" onclick="newSeting()">设置棋盘大小</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </nav>
+
+        </header>
+
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+
+
+
+
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form class="form-horizontal" action="/seting" method="post">
+
+                        <div class="form-group">
+                            <label class="col-xs-12" >设置棋盘大小</label>
+                            <div class="col-xs-12">
+                                <select class="form-control" id="chessBroad-size" name="chessBroad-size" size="1">
+                                    <option value="2">2×2</option>
+                                    <option value="4">4×4</option>
+                                    <option value="8">8×8</option>
+                                    <option value="16">16×16</option>
+                                    <option value="32">32×32（可显示的最大的棋盘）</option>
+                                    <option value="64">64×64(太大了看不清）</option>
+                                </select>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12">设置速度</label>
+                            <div class="col-xs-12">
+                                <select class="form-control" id="chessBroad-speed" name="chessBroad-speed" size="1">
+                                    <option value="100">特快</option>
+                                    <option value="500">快</option>
+                                    <option value="1000">中</option>
+                                    <option value="1500">慢</option>
+                                </select>
+                            </div>
+                            <br>
+                        </div>
+                          <br>
+                         <div class="form-group">
+                              <div class="col-xs-12">
+                                  <button class="btn btn-primary" type="submit">生成棋盘</button>
+                              </div>
+                          </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/user.js}"></script>
+
+
+
+
+
+</body>
+</html>

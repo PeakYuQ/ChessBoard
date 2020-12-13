@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>覆盖过程动画</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+</head>
+
+<body class="lyear-layout-sidebar-close">
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+
+        <header class="lyear-layout-header" >
+
+            <nav class="navbar navbar-default">
+                <div class="topbar">
+
+                    <div class="topbar-left">
+                        <span class="navbar-page-title"> <h4>棋盘覆盖演示</h4> </span>
+                    </div>
+
+                    <div >
+
+                        <div class="example-box ">
+                             <button class="btn btn-w-lg btn-info" onclick="newSeting()"  >设置棋盘大小</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </nav>
+
+        </header>
+
+
+
+
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+
+
+
+
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-w-lg btn-primary"  onclick="activeBoard(1)">覆盖过程动画</button>
+                        <a class="masonry-item" href="#">
+                            <img src="https://pic-20201016.oss-cn-qingdao.aliyuncs.com/img/image-20201201164552575.png" alt="The selected child description">
+                            残缺块</a>
+                        <a class="masonry-item" href="#">
+                            <img src="https://pic-20201016.oss-cn-qingdao.aliyuncs.com/img/image-20201201164415652.png" alt="The selected child description">
+                            [[${session.yellow}]]块</a>
+                        <a class="masonry-item" href="#">
+                            <img src="https://pic-20201016.oss-cn-qingdao.aliyuncs.com/img/image-20201201164503017.png" alt="The selected child description">
+                            [[${session.pupper}]]块</a>
+                        <a class="masonry-item" href="#">
+                            <img src="https://pic-20201016.oss-cn-qingdao.aliyuncs.com/img/image-20201201164512354.png" alt="The selected child description">
+                            [[${session.red}]]块</a>
+                        <a class="masonry-item" href="#">
+                            <img src="https://pic-20201016.oss-cn-qingdao.aliyuncs.com/img/image-20201201164613655.png" alt="The selected child description">
+                            [[${session.green}]]块</a>
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive" style="text-align: center">
+                            <button th:if="${session.current == session.total }" class="btn btn-w-lg btn-primary"  onclick="activeBoard(1)">重播</button>
+                            <button th:if="${session.current == session.total }" class="btn btn-w-lg btn-info" onclick="newSeting()"  >设置棋盘大小</button>
+                            <br> <br>
+                            <table class="table table-hover" id="chess" >
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+    window.onload=function()
+    {//棋盘设置
+
+        var  Matrix =  new Array();
+        Matrix = [[${board}]];//棋盘数组
+        var  active1 =  new Array();
+        active = [[${session.active}]];//棋盘数组
+        var chess=document.getElementById('chess');
+        var N=[[${session.size}]];//size
+        var table=document.createElement('table');
+        chess.appendChild(table);
+        table.style.border='2px solid';
+        table.style.borderCollapse='collapse';
+        table.style.margin='0 auto';
+        var q;
+        var color;
+        var x,y;
+        x = [[${session.X}]];
+        y = [[${session.Y}]];
+
+        for(var i=0;i<N;i++)
+        {
+            var tr=document.createElement('tr');
+            table.appendChild(tr);
+            tr.style.height = "20px";
+            tr.style.border='1px solid #ccc';
+            for(var j=0;j<N;j++)
+            {
+                var td=document.createElement('td');
+                tr.appendChild(td);
+                td.style.width = "20px";
+                td.style.border='1px solid #ccc';
+                q=Matrix[i][j];
+                if (q == -1){
+                    td.style.background='rgb(254,253,255)';
+                    continue;
+                }
+
+                td.innerHTML = q;
+
+
+
+                color = active[q][6];
+                if (color == 1){
+                    td.style.background='rgb(255,25,25)';
+                }else if (color == 2) {
+                    td.style.background = 'rgb(0,255,0)';
+                }else if (color == 3) {
+                    td.style.background = 'rgb(252,255,78)';
+                }else if (color == 4){
+                    td.style.background='rgb(217,75,218)';
+                }
+            }
+        }
+        table.rows[x].cells[y].style.background='rgb(18,4,27)';
+
+        var speed = [[${session.speed}]]
+        setTimeout(function() {
+            var current = [[${session.current}]];
+            var total = [[${session.total}]];
+
+            if ( total<=current)
+            {
+                return false;
+            }
+            else{
+                current= current+1;
+                activeBoard(current);
+            }
+        }, speed);
+
+
+
+    }
+</script>
+<script type="text/javascript" th:src="@{/js/user.js}"></script>
+
+
+
+</body>
+</html>
